@@ -18,12 +18,12 @@ const TabRouteConfigs = {
     screen: HomeNav,
     path: '/home',
     navigationOptions: ({ navigation }) => ({
-      tabBarLabel: '团购',
+      tabBarLabel: '点餐',
       tabBarIcon: ({ focused, tintColor }) => (
         <Image
-          style={{ tintColor: tintColor, width: 25, height: 25 }}
-          source={focused ? require('../../images/tabbar/tabbar_homepage.png')
-            : require('../../images/tabbar/tabbar_homepage_selected.png')}
+          style={{ width: 40, height: 40 }}
+          source={focused ? require('../../images/tabbar/diancanSelected.png')
+            : require('../../images/tabbar/diancan.png')}
         />
       )
     })
@@ -32,12 +32,12 @@ const TabRouteConfigs = {
     screen: NearNav,
     path: '/near',
     navigationOptions: ({ navigation }) => ({
-      tabBarLabel: '附近',
+      tabBarLabel: '餐盒',
       tabBarIcon: ({ focused, tintColor }) => (
         <Image
-          style={{ tintColor: tintColor, width: 25, height: 25 }}
-          source={focused ? require('../../images/tabbar/tabbar_merchant.png')
-            : require('../../images/tabbar/tabbar_merchant_selected.png')}
+          style={{ width: 30, height: 30 }}
+          source={focused ? require('../../images/tabbar/foodboxSelected.png')
+            : require('../../images/tabbar/foodbox.png')}
         />
       )
     }),
@@ -46,12 +46,12 @@ const TabRouteConfigs = {
     screen: OrderNav,
     path: '/order',
     navigationOptions: ({ navigation }) => ({
-      tabBarLabel: '附近',
+      tabBarLabel: '订单',
       tabBarIcon: ({ focused, tintColor }) => (
         <Image
-          style={{ tintColor: tintColor, width: 25, height: 25 }}
-          source={focused ? require('../../images/tabbar/tabbar_order.png')
-            : require('../../images/tabbar/tabbar_order_selected.png')}
+          style={{ width: 40, height: 40 }}
+          source={focused ? require('../../images/tabbar/orderSelected.png')
+            : require('../../images/tabbar/order.png')}
         />
       )
     }),
@@ -63,9 +63,9 @@ const TabRouteConfigs = {
       tabBarLabel: '我的',
       tabBarIcon: ({ focused, tintColor }) => (
         <Image
-          style={{ tintColor: tintColor, width: 25, height: 25 }}
-          source={focused ? require('../../images/tabbar/tabbar_mine.png')
-            : require('../../images/tabbar/tabbar_mine_selected.png')}
+          style={{width: 40, height: 40 }}
+          source={focused ? require('../../images/tabbar/mineSelected.png')
+            : require('../../images/tabbar/mine.png')}
         />
       )
     }),
@@ -76,6 +76,10 @@ const TabNavigatorConfigs = {
   tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom',
   lazy: true,
+  tabBarOptions: {
+    activeTintColor: 'black',
+    inactiveTintColor: 'black',
+  },
 };
 const Tabbar = TabNavigator(TabRouteConfigs, TabNavigatorConfigs);
 

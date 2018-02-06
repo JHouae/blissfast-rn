@@ -1,44 +1,18 @@
 import * as types from './types';
 import { get } from '../network/network';
-import api from '../common/api';
+import * as api from '../network/api';
 import Toast from 'react-native-root-toast';
 
-export function requestDiscount() {
+export function requestBanner() {
   return (dispatch) => {
-    get(api.discount)
-    .then((result) => {
+    get(api.homePageInfo, {"module": "slide"})
+    .then((result) => {      
       dispatch({
-        type: types.requestDiscount, 
-        payload: result.data
+        type: types.requestBanner, 
+        payload: result.body.slideArr,
       });
     }).catch((err) => {
 
-    })
-  }
-}
-
-export function requestRecommend() {
-  return (dispatch) => {
-    get(api.recommend)
-    .then((result) => {
-      let dataList = result.data.map(
-        (info) => {
-          return {
-            id: info.id,
-            imageUrl: info.squareimgurl,
-            title: info.mname,
-            subtitle: `[${info.range}]${info.title}`,
-            price: info.price
-          }
-        }
-      )
-      Toast.show('=.=');
-      dispatch({
-        type: types.requestRecommend, 
-        payload: dataList
-      });
-    }).catch((err) => {
-      
     })
   }
 }

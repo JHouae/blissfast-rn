@@ -3,5 +3,4 @@
 
 export const showToast = 'showToast';
 
-export const requestDiscount = 'requestDiscount';
-export const requestRecommend = 'requestRecommend';
+export const requestBanner = 'requestBanner';

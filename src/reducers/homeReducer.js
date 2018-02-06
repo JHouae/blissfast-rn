@@ -1,22 +1,18 @@
 import * as types from '../actions/types';
 
 const initialState = {
-  discountData: [],
+  bannerArray: [],
   recommendData: [],
 };
 
 function homeReducer(state = initialState, action) {
   switch (action.type) {
-    case types.requestDiscount:
+    case types.requestBanner:
       return {
         ...state,
-        discountData: action.payload,
+        bannerArray: action.payload,
       };
-    case types.requestRecommend:
-      return {
-        ...state,
-        recommendData: action.payload,
-      }
+
     default: 
       return state;
   }
