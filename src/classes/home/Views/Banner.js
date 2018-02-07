@@ -52,6 +52,7 @@ class Banner extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
     width: screen.width / 5,

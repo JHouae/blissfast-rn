@@ -2,7 +2,8 @@ import * as types from '../actions/types';
 
 const initialState = {
   bannerArray: [],
-  recommendData: [],
+  recommendArray: [],
+  columnPopArray: [],
 };
 
 function homeReducer(state = initialState, action) {
@@ -12,8 +13,18 @@ function homeReducer(state = initialState, action) {
         ...state,
         bannerArray: action.payload,
       };
+    case types.requestRecommend:
+      return {
+        ...state,
+        recommendArray: action.payload,
+      };
+    case types.requestColumnPop:
+      return {
+        ...state,
+        columnPopArray: action.payload,
+      };
 
-    default: 
+    default:
       return state;
   }
 }

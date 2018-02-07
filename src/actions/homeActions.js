@@ -16,3 +16,31 @@ export function requestBanner() {
     })
   }
 }
+
+export function requestRecommend() {
+  return (dispatch) => {
+    get(api.homePageInfo, {"module": "recommend"})
+    .then((result) => {      
+      dispatch({
+        type: types.requestRecommend, 
+        payload: result.body.recommendArr,
+      });
+    }).catch((err) => {
+
+    })
+  }
+}
+
+export function requestColumnPop() {
+  return (dispatch) => {
+    get(api.homePageInfo, {"module": "columnPop"})
+    .then((result) => {      
+      dispatch({
+        type: types.requestColumnPop, 
+        payload: result.body.columnPopArr,
+      });
+    }).catch((err) => {
+
+    })
+  }
+}
