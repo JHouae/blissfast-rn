@@ -4,10 +4,10 @@ import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
 import { connect } from 'react-redux';
 import TabbarItem from '../../components/TabbarItem';
 
-import HomeNav from '../home/HomeNav';
-import NearNav from '../nearBy/NearNav';
-import OrderNav from '../order/OrderNav';
-import MineNav from '../mine/MineNav';
+import Home from '../home/Home';
+import Near from '../nearBy/Near';
+import Order from '../order/Order';
+import Mine from '../mine/Mine';
 
 import ErrorVC from './ErrorVC';
 import LoginVC from '../login/LoginVC';
@@ -15,7 +15,7 @@ import LoginVC from '../login/LoginVC';
 
 const TabRouteConfigs = {
   HomeNav: {
-    screen: HomeNav,
+    screen: Home,
     path: '/home',
     navigationOptions: ({ navigation }) => ({
       tabBarLabel: '点餐',
@@ -29,7 +29,7 @@ const TabRouteConfigs = {
     })
   },
   NearNav: {
-    screen: NearNav,
+    screen: Near,
     path: '/near',
     navigationOptions: ({ navigation }) => ({
       tabBarLabel: '餐盒',
@@ -43,7 +43,7 @@ const TabRouteConfigs = {
     }),
   },
   OrderNav: {
-    screen: OrderNav,
+    screen: Order,
     path: '/order',
     navigationOptions: ({ navigation }) => ({
       tabBarLabel: '订单',
@@ -57,13 +57,13 @@ const TabRouteConfigs = {
     }),
   },
   MineNav: {
-    screen: MineNav,
+    screen: Mine,
     path: '/mine',
     navigationOptions: ({ navigation }) => ({
       tabBarLabel: '我的',
       tabBarIcon: ({ focused, tintColor }) => (
         <Image
-          style={{width: 40, height: 40 }}
+          style={{ width: 40, height: 40 }}
           source={focused ? require('../../images/tabbar/mineSelected.png')
             : require('../../images/tabbar/mine.png')}
         />
@@ -83,32 +83,24 @@ const TabNavigatorConfigs = {
 };
 const Tabbar = TabNavigator(TabRouteConfigs, TabNavigatorConfigs);
 
-class RootTabbarVC extends Component {
-  componentDidMount() {
-    this.loginListen = DeviceEventEmitter.addListener('showLoginVC', (e) => {
-      this.props.navigation.navigate('LoginVC');
-    });
-  }
-
-  componentWillUnmount() {
-    this.loginListen.remove();
-  }
-
-  render() {
-    return (
-      <Tabbar />
-    );
-  }
-};
+// class RootTabbarVC extends Component {
+//   render() {
+//     return (
+//       <Tabbar>
+//       </Tabbar>
+//     );
+//   }
+// };
 
 const StackRouteConfigs = {
-  Tab: { screen: RootTabbarVC, },
+  Tab: { screen: Tabbar, },
   LoginVC: { screen: LoginVC, },
+
 };
 const StackNavigatorConfigs = {
-  navigationOptions: {
-    header: null,
-  },
+  // navigationOptions: {
+  //   header: null,
+  // },
   mode: 'modal',
 }
 const Navigator = StackNavigator(StackRouteConfigs, StackNavigatorConfigs);

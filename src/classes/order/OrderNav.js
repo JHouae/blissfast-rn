@@ -12,7 +12,7 @@ const Navigator = StackNavigator({
 export default class OrderNav extends Component {
   render() {
     return (
-      <Navigator />
+      <Order />
     );
   }
 }

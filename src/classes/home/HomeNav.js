@@ -14,7 +14,7 @@ const Navigator = StackNavigator({
 export default class HomeNav extends Component {
   render() {
     return (
-      <Navigator />
+      <Home />
     );
   }
 }

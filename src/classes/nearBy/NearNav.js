@@ -12,7 +12,7 @@ const Navigator = StackNavigator({
 export default class NearNav extends Component {
   render() {
     return (
-      <Navigator />
+      <Near />
     );
   }
 }

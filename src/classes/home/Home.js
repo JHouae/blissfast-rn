@@ -9,6 +9,7 @@ import Banner from './Views/Banner';
 import HalfWidthCell from './Views/HalfWidthCell';
 import FullWidthCell from './Views/FullWidthCell';
 import WidgetHeader from './Views/WidgetHeader';
+import WidgetAd from './Views/WidgetAd';
 import SectionSpace from './Views/SectionSpace';
 
 
@@ -31,7 +32,9 @@ class Home extends Component {
   bannerItemClick = (record) => {
     console.log(record);
     console.log(this.props);
-    this.props.navigation.navigate('WebVC', { record: record });
+    // this.props.navigation.navigate('WebVC', { record: record });
+    // DeviceEventEmitter.emit('showLoginVC');
+    this.props.navigation.navigate('LoginVC');
   }
 
   showToast = () => {
@@ -67,11 +70,13 @@ class Home extends Component {
         {this.props.columnPopArray.map((value, index) => {
           return (
             <View key={value.moduleId}>
-              <WidgetHeader title={value.title} subTitle={value.subTitle} />
+              <WidgetHeader title={value.title} subTitle={value.subTitle} titleColor={value.titleColor} />
+              {value.adImg ? <WidgetAd adImg={value.adImg}/> : null}
               {value.contentShowType === '2C' ?
                 <FlatList
                   numColumns={2}
                   data={value.contentArr}
+                  ItemSeparatorComponent={() => <View style={{height: 5, backgroundColor: '#f6f6f6',}}></View>}
                   renderItem={({ item, separators }) => (
                     <HalfWidthCell record={item} />
                   )}
@@ -93,14 +98,25 @@ class Home extends Component {
           return (
             <View key={value.moduleId}>
               <WidgetHeader title={value.title} subTitle={value.subTitle} />
-              <FlatList
-                numColumns={2}
-                data={value.contentArr}
-                renderItem={({ item, separators }) => (
-                  <HalfWidthCell record={item} />
-                )}
-                keyExtractor={(record) => record.contentId}
-              />
+              {value.adImg ? <WidgetAd adImg={value.adImg}/> : null}
+              {value.contentShowType === '2C' ?
+                <FlatList
+                  numColumns={2}
+                  ItemSeparatorComponent={() => <View style={{height: 5, backgroundColor: '#f6f6f6',}}></View>}
+                  data={value.contentArr}
+                  renderItem={({ item, separators }) => (
+                    <HalfWidthCell record={item} />
+                  )}
+                  keyExtractor={(record) => record.contentId}
+                /> :
+                <FlatList
+                  data={value.contentArr}
+                  ItemSeparatorComponent={() => <View style={{height: 5, backgroundColor: '#f6f6f6',}}></View>}
+                  renderItem={({ item, separators }) => (
+                    <FullWidthCell record={item} />
+                  )}
+                  keyExtractor={(record) => record.contentId}
+                />}
               <SectionSpace />
             </View>
           )

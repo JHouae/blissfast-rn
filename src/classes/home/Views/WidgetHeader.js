@@ -6,7 +6,7 @@ export default class WidgetHeader extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}> {this.props.title} </Text>
+        <Text style={[styles.title, {color: this.props.titleColor}]}> {this.props.title} </Text>
         <Text style={styles.subTitle}> {this.props.subTitle} </Text>
       </View>
     );
@@ -23,9 +23,11 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   title: {
+    fontWeight: 'bold',
     fontSize: 15,
   },
   subTitle: {
-    fontSize: 12,
+    marginTop: 3,
+    fontSize: 10,
   }
 });

@@ -23,11 +23,11 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     flexDirection: 'column',
-    width: screen.width / 2,
+    width: (screen.width - 5) / 2,
     height: screen.width / 2 + 55,
   },
   img: {
-    width: screen.width / 2,
+    width: (screen.width - 5) / 2,
     height: screen.width / 2,
   }
 });
