@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import {  View, Text, Button, StyleSheet } from 'react-native';
+import {  View, Text, Button, StyleSheet, DeviceEventEmitter } from 'react-native';
 import { connect } from 'react-redux';
 import { screen } from '../../common/common';
 
 class LoginVC extends Component {
   
   dismissHandle = () => {
-    this.props.navigation.goBack();
+    DeviceEventEmitter.emit('showLoginVC', false);
   }
 
   render() {

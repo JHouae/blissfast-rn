@@ -1,5 +1,5 @@
 // 所有的action
-// export const loginModal = 'loginModel';
+export const showLoginModal = 'showLoginModal';
 
 export const showToast = 'showToast';
 

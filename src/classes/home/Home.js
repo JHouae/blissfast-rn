@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, FlatList, SectionList, DeviceEventEmitter, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, FlatList, SectionList, DeviceEventEmitter, ScrollView, Modal } from 'react-native';
 import { connect } from 'react-redux';
 import Toast from 'react-native-root-toast';
 import api from '../../network/api';
 import { get } from '../../network/network';
 import { requestBanner, requestRecommend, requestColumnPop } from '../../actions/homeActions';
+
+import LoginVC from '../login/LoginVC';
+
 import Banner from './Views/Banner';
 import HalfWidthCell from './Views/HalfWidthCell';
 import FullWidthCell from './Views/FullWidthCell';
@@ -22,19 +25,27 @@ class Home extends Component {
   });
   constructor(props) {
     super(props);
+    this.state = { showLoginModal: false }
   }
   componentDidMount() {
     this.props.dispatch(requestBanner());
     this.props.dispatch(requestRecommend());
     this.props.dispatch(requestColumnPop());
+
+    this.loginListen = DeviceEventEmitter.addListener('showLoginVC', (isShow = true) => {
+      this.setState({ showLoginModal: isShow })
+    });
   }
+  componentWillUnmount() {
+    this.loginListen.remove();
+  }
+
 
   bannerItemClick = (record) => {
     console.log(record);
     console.log(this.props);
     // this.props.navigation.navigate('WebVC', { record: record });
-    // DeviceEventEmitter.emit('showLoginVC');
-    this.props.navigation.navigate('LoginVC');
+    DeviceEventEmitter.emit('showLoginVC');
   }
 
   showToast = () => {
@@ -71,12 +82,12 @@ class Home extends Component {
           return (
             <View key={value.moduleId}>
               <WidgetHeader title={value.title} subTitle={value.subTitle} titleColor={value.titleColor} />
-              {value.adImg ? <WidgetAd adImg={value.adImg}/> : null}
+              {value.adImg ? <WidgetAd adImg={value.adImg} /> : null}
               {value.contentShowType === '2C' ?
                 <FlatList
                   numColumns={2}
                   data={value.contentArr}
-                  ItemSeparatorComponent={() => <View style={{height: 5, backgroundColor: '#f6f6f6',}}></View>}
+                  ItemSeparatorComponent={() => <View style={{ height: 5, backgroundColor: '#f6f6f6', }}></View>}
                   renderItem={({ item, separators }) => (
                     <HalfWidthCell record={item} />
                   )}
@@ -84,7 +95,7 @@ class Home extends Component {
                 /> :
                 <FlatList
                   data={value.contentArr}
-                  ItemSeparatorComponent={() => <View style={{height: 5, backgroundColor: '#f6f6f6',}}></View>}
+                  ItemSeparatorComponent={() => <View style={{ height: 5, backgroundColor: '#f6f6f6', }}></View>}
                   renderItem={({ item, separators }) => (
                     <FullWidthCell record={item} />
                   )}
@@ -98,11 +109,11 @@ class Home extends Component {
           return (
             <View key={value.moduleId}>
               <WidgetHeader title={value.title} subTitle={value.subTitle} />
-              {value.adImg ? <WidgetAd adImg={value.adImg}/> : null}
+              {value.adImg ? <WidgetAd adImg={value.adImg} /> : null}
               {value.contentShowType === '2C' ?
                 <FlatList
                   numColumns={2}
-                  ItemSeparatorComponent={() => <View style={{height: 5, backgroundColor: '#f6f6f6',}}></View>}
+                  ItemSeparatorComponent={() => <View style={{ height: 5, backgroundColor: '#f6f6f6', }}></View>}
                   data={value.contentArr}
                   renderItem={({ item, separators }) => (
                     <HalfWidthCell record={item} />
@@ -111,7 +122,7 @@ class Home extends Component {
                 /> :
                 <FlatList
                   data={value.contentArr}
-                  ItemSeparatorComponent={() => <View style={{height: 5, backgroundColor: '#f6f6f6',}}></View>}
+                  ItemSeparatorComponent={() => <View style={{ height: 5, backgroundColor: '#f6f6f6', }}></View>}
                   renderItem={({ item, separators }) => (
                     <FullWidthCell record={item} />
                   )}
@@ -121,6 +132,12 @@ class Home extends Component {
             </View>
           )
         })}
+        <Modal
+          animationType={"slide"}
+          visible={this.state.showLoginModal}
+        >
+          <LoginVC />
+        </Modal>
       </ScrollView>
     );
   }
@@ -132,6 +149,7 @@ const mapStateToProps = (state) => {
     bannerArray: state.home.bannerArray,
     recommendArray: state.home.recommendArray,
     columnPopArray: state.home.columnPopArray,
+    showLoginModal: state.common.showLoginModal,
   }
 }
 

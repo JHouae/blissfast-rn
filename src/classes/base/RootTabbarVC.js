@@ -94,14 +94,13 @@ const Tabbar = TabNavigator(TabRouteConfigs, TabNavigatorConfigs);
 
 const StackRouteConfigs = {
   Tab: { screen: Tabbar, },
-  LoginVC: { screen: LoginVC, },
-
+  ErrorVC: {screen: ErrorVC},
 };
 const StackNavigatorConfigs = {
   // navigationOptions: {
   //   header: null,
   // },
-  mode: 'modal',
+  // mode: 'modal',
 }
 const Navigator = StackNavigator(StackRouteConfigs, StackNavigatorConfigs);
 

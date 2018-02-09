@@ -6,3 +6,10 @@ export function showToast(toast) {
     payload: toast,
   }
 }
+
+export function showLoginModal(toast) {
+  return {
+    type: types.showLoginModal,
+    payload: toast,
+  }
+}
